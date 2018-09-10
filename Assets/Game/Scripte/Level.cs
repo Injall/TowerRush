@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Sprite))]
-public class Level : MonoBehaviour
+public abstract class Level : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 

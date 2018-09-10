@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int roomAmount = 10;
-    public Level[] roomsPrefabs;
+    public int levelAmount = 10;
+    public Level[] levelsPrefabs;
     public TweenPosition cameraTween;
     private static GameManager instance;
     private int currentLevel = 0;
 
-    private List<Level> roomsInstantied = new List<Level>();
+    private List<Level> levelInstantied = new List<Level>();
     private float levelUnitHeight = 0;
 
     public static GameManager Instance
@@ -28,10 +28,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.O))
+            NextLevel();
+    }
+
     // Use this for initialization
     void Start()
     {
-        levelUnitHeight = 1080 / (float)roomsPrefabs[0].SpriteRenderer.sprite.pixelsPerUnit;
+        levelUnitHeight = 1080 / (float)levelsPrefabs[0].SpriteRenderer.sprite.pixelsPerUnit;
 
         RestartGame();
     }
@@ -39,19 +45,18 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         // Clear rooms pool
-        for (int i = 0; i < roomsInstantied.Count; ++i)
-            Destroy(roomsInstantied[i]);
+        for (int i = 0; i < levelInstantied.Count; ++i)
+            Destroy(levelInstantied[i]);
 
-        roomsInstantied.Clear();
+        levelInstantied.Clear();
 
         // Create new rooms pool
-        for (int i = 0; i < roomAmount; ++i)
+        for (int i = 0; i < levelAmount; ++i)
         {
-            Level r = Instantiate(roomsPrefabs[Random.Range(0, roomsPrefabs.Length)].gameObject).GetComponent<Level>();
+            Level level = Instantiate(levelsPrefabs[Random.Range(0, levelsPrefabs.Length)].gameObject).GetComponent<Level>();
+            level.transform.position = new Vector3(0, levelUnitHeight * i, 0);
 
-            r.transform.position = new Vector3(0, levelUnitHeight * i, 0);
-
-            roomsInstantied.Add(r);
+            levelInstantied.Add(level);
         }
 
         GoToLevel(0);
@@ -66,13 +71,13 @@ public class GameManager : MonoBehaviour
         cameraTween.PlayForward();
 
         // Init the level
-        roomsInstantied[level].StartLevel();
+        levelInstantied[level].StartLevel();
     }
 
     public void NextLevel()
     {
         currentLevel++;
-        if (currentLevel == roomAmount) // If all levels have been succeed, win the game
+        if (currentLevel == levelAmount) // If all levels have been succeed, win the game
         {
             print("You WON ! Let's do it again !");
             RestartGame();
