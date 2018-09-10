@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669906}
   - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
@@ -192,18 +191,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &534669906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: a1eba50eee7ecba42abbfb39d5b0cbce, type: 2}
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,8 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09c10b5a28408b418c5b2cfa9833dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomAmount: 10
-  roomsPrefabs:
+  levelAmount: 10
+  levelsPrefabs:
   - {fileID: 114022331743938864, guid: ad8ad1d2fc5b63446a5991cc143d711f, type: 2}
   cameraTween: {fileID: 534669907}
 --- !u!4 &2143787518
